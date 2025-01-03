@@ -1,0 +1,9 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared
+    container_name: cloudflare-tunnel
+    restart: unless-stopped
+    command: tunnel run
+    network_mode: synobridge
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
