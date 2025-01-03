@@ -1,9 +1,11 @@
 services:
   cloudflared:
     image: cloudflare/cloudflared
-    container_name: cloudflare-tunnel
+    container_name: cloudflared
+    user: 1027:65536
     restart: unless-stopped
     command: tunnel run
     network_mode: synobridge
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+      - TUNNEL_METRICS=0.0.0.0:20241
