@@ -1,0 +1,54 @@
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    user: 1027:65536
+    restart: always
+    network_mode: synobridge
+    ports:
+      - "3000:3000"
+    volumes:
+      - /volume1/docker/prometheus/configs/grafana.ini:/etc/grafana/grafana.ini
+      - /volume1/docker/prometheus/data/grafana:/var/lib/grafana
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    user: 1027:65536
+    restart: always
+    network_mode: synobridge
+    ports:
+      - "9090:9090"
+    volumes:
+      - /volume1/docker/prometheus/configs/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /volume1/docker/prometheus/data/prometheus:/prometheus
+
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    user: 1027:65536
+    restart: always
+    network_mode: synobridge
+    ports:
+      - "9093:9093"
+    volumes:
+      - /volume1/docker/prometheus/data/alertmanager:/alertmanager
+
+  node-exporter:
+    privileged: true
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node-exporter
+    user: 1027:65536
+    restart: unless-stopped
+    network_mode: synobridge
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - "--collector.filesystem.ignored-mount-points"
+      - "^/(rootfs/)?(dev|etc|host|proc|run|sys|volume1)($$|/)"

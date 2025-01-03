@@ -1,0 +1,12 @@
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Europe/Istanbul
+      - PROMETHEUS_ENABLED=true
+    network_mode: synobridge
+    ports:
+      - "8192:8192"
+    restart: unless-stopped

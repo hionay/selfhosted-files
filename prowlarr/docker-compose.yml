@@ -1,0 +1,15 @@
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1027
+      - PGID=65536
+      - TZ=Europe/Istanbul
+    volumes:
+      - /volume1/docker/prowlarr:/config
+    ports:
+      - 9696:9696
+    network_mode: synobridge
+    restart: unless-stopped
+

@@ -1,0 +1,20 @@
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1027
+      - PGID=65536
+      - TZ=Europe/Istanbul
+      - WEBUI_PORT=8090
+      - TORRENTING_PORT=9855
+    volumes:
+      - /volume1/docker/qbittorrent:/config
+      - /volume1/data/downloads:/downloads
+    ports:
+      - 8090:8090
+      - 9855:9855
+      - 9855:9855/udp
+    network_mode: synobridge
+    restart: unless-stopped
+

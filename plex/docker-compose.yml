@@ -1,0 +1,17 @@
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1027
+      - PGID=65536
+      - TZ=Europe/Istanbul
+      - VERSION=docker
+    volumes:
+      - /volume1/docker/plex:/config
+      - /volume1/data/media:/data/media
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+

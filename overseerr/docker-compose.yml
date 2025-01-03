@@ -1,0 +1,15 @@
+services:
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=1027
+      - PGID=65536
+      - TZ=Europe/Istanbul
+    volumes:
+      - /volume1/docker/overseerr:/config
+    ports:
+      - 5055:5055
+    network_mode: synobridge
+    restart: unless-stopped
+

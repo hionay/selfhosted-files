@@ -1,0 +1,17 @@
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1027
+      - PGID=65536
+      - TZ=Europe/Istanbul
+    volumes:
+      - /volume1/docker/sonarr:/config
+      - /volume1/data/media/tv-series:/tv
+      - /volume1/data/downloads:/downloads
+    ports:
+      - 8989:8989
+    network_mode: synobridge
+    restart: unless-stopped
+

@@ -1,0 +1,13 @@
+services:
+  recyclarr:
+    image: ghcr.io/recyclarr/recyclarr
+    container_name: recyclarr
+    user: 1027:65536
+    network_mode: synobridge
+    volumes:
+      - /volume1/docker/recyclarr:/config
+    environment:
+      - TZ=Europe/Istanbul
+      - RECYCLARR_CREATE_CONFIG=true
+    restart: unless-stopped
+

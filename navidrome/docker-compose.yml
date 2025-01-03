@@ -1,0 +1,19 @@
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    user: 1027:65536
+    ports:
+      - "4533:4533"
+    network_mode: synobridge
+    restart: unless-stopped
+    environment:
+      ND_SCANSCHEDULE: 5m
+      ND_LOGLEVEL: info
+      ND_SESSIONTIMEOUT: 24h
+      ND_ENABLEINSIGHTSCOLLECTOR: false
+      ND_PROMETHEUS_ENABLED: true
+    volumes:
+      - "/volume1/docker/navidrome:/data"
+      - "/volume1/data/media/music:/music:to"
+

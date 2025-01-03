@@ -1,0 +1,16 @@
+services:
+  unpackerr:
+    image: golift/unpackerr
+    container_name: unpackerr
+    volumes:
+      - /volume1/data/downloads:/downloads
+    restart: always
+    user: 1027:65536
+    network_mode: synobridge
+    environment:
+      - TZ=Europe/Istanbul
+      - UN_LOG_FILE=/downloads/unpackerr.log
+      - UN_SONARR_0_URL=http://sonarr:8989
+      - UN_SONARR_0_API_KEY=
+      - UN_RADARR_0_URL=http://radarr:7878
+      - UN_RADARR_0_API_KEY=

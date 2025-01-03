@@ -1,0 +1,15 @@
+services:
+  tautulli:
+    image: lscr.io/linuxserver/tautulli:latest
+    container_name: tautulli
+    environment:
+      - PUID=1027
+      - PGID=65536
+      - TZ=Europe/Istanbul
+    volumes:
+      - /volume1/docker/tautulli:/config
+    ports:
+      - 8181:8181
+    network_mode: synobridge
+    restart: unless-stopped
+

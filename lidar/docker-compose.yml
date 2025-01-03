@@ -1,0 +1,17 @@
+services:
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=1027
+      - PGID=65536
+      - TZ=Europe/Istanbul
+    volumes:
+      - /volume1/docker/lidarr:/config
+      - /volume1/data/media/music:/music
+      - /volume1/data/downloads:/downloads
+    ports:
+      - 8686:8686
+    network_mode: synobridge
+    restart: unless-stopped
+

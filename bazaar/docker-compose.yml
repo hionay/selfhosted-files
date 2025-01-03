@@ -1,0 +1,17 @@
+services:
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1027
+      - PGID=65536
+      - TZ=Europe/Istanbul
+    volumes:
+      - /volume1/docker/bazarr:/config
+      - /volume1/data/media/movies:/movies
+      - /volume1/data/media/tv-series:/tv
+    ports:
+      - 6767:6767
+    network_mode: synobridge
+    restart: unless-stopped
+
