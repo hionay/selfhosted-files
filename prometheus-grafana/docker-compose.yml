@@ -23,22 +23,11 @@ services:
       - /volume1/docker/prometheus/configs/prometheus.yml:/etc/prometheus/prometheus.yml
       - /volume1/docker/prometheus/data/prometheus:/prometheus
 
-  alertmanager:
-    image: prom/alertmanager
-    container_name: alertmanager
-    user: 1027:65536
-    restart: always
-    network_mode: synobridge
-    ports:
-      - "9093:9093"
-    volumes:
-      - /volume1/docker/prometheus/data/alertmanager:/alertmanager
-
   node-exporter:
     privileged: true
     image: quay.io/prometheus/node-exporter:latest
     container_name: node-exporter
-    user: 1027:65536
+    #user: 1027:65536
     restart: unless-stopped
     network_mode: synobridge
     ports:
@@ -50,5 +39,7 @@ services:
     command:
       - "--path.procfs=/host/proc"
       - "--path.sysfs=/host/sys"
-      - "--collector.filesystem.ignored-mount-points"
+      #- "--collector.systemd"
+      - "--collector.processes"
+      - "--collector.filesystem.mount-points-exclude"
       - "^/(rootfs/)?(dev|etc|host|proc|run|sys|volume1)($$|/)"

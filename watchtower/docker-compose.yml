@@ -1,0 +1,16 @@
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    environment:
+      - TZ=Europe/Istanbul
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_INCLUDE_STOPPED=true
+      - WATCHTOWER_REVIVE_STOPPED=false
+      - WATCHTOWER_SCHEDULE=0 0 3 * * *
+      - WATCHTOWER_REMOVE_VOLUMES=true
+      - WATCHTOWER_HTTP_API_TOKEN=
+      - WATCHTOWER_HTTP_API_METRICS=true
+    network_mode: synobridge
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

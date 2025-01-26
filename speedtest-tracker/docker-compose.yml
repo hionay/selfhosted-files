@@ -1,0 +1,18 @@
+services:
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    restart: unless-stopped
+    container_name: speedtest-tracker
+    network_mode: synobridge
+    ports:
+      - 8080:80
+      - 8443:443
+    environment:
+      - PUID=1027
+      - PGID=65536
+      - APP_KEY=
+      - DB_CONNECTION=sqlite
+      - APP_TIMEZONE=Europe/Istanbul
+    volumes:
+      - /volume1/docker/speedtest-tracker:/config
+      #- /path/to-custom-ssl-keys:/config/keys

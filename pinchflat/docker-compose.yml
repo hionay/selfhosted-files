@@ -1,0 +1,14 @@
+services:
+  pinchflat:
+    image: ghcr.io/kieraneglin/pinchflat:latest
+    container_name: pinchflat
+    user: 1027:65536
+    environment:
+      - TZ=Europe/Istanbul
+      - ENABLE_PROMETHEUS=true
+    ports:
+      - '8945:8945'
+    network_mode: synobridge
+    volumes:
+      - /volume1/docker/pinchflat:/config
+      - /volume1/data/downloads:/downloads

@@ -1,0 +1,11 @@
+services:
+  memos:
+    image: neosmemo/memos:stable
+    container_name: memos
+    user: 1027:65536
+    network_mode: synobridge
+    volumes:
+      - /volume1/docker/memos:/var/opt/memos
+    ports:
+      - 5230:5230
+

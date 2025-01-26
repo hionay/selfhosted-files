@@ -8,12 +8,12 @@ services:
     network_mode: synobridge
     restart: unless-stopped
     environment:
-      ND_SCANSCHEDULE: 5m
+      #ND_SCANSCHEDULE: 5m
       ND_LOGLEVEL: info
       ND_SESSIONTIMEOUT: 24h
       ND_ENABLEINSIGHTSCOLLECTOR: false
       ND_PROMETHEUS_ENABLED: true
     volumes:
       - "/volume1/docker/navidrome:/data"
-      - "/volume1/data/media/music:/music:to"
+      - "/volume1/data/media/music:/music:ro"
 

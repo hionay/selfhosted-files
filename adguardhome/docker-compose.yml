@@ -1,0 +1,27 @@
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    hostname: adguardhome
+    user: 1027:65536
+    networks:
+      adguardhome_network:
+        ipv4_address: 192.168.1.153
+    environment:
+      - TZ=Europe/Istanbul
+    volumes:
+      - /volume1/docker/adguardhome/conf:/opt/adguardhome/conf
+      - /volume1/docker/adguardhome/work:/opt/adguardhome/work
+    restart: always
+
+networks:
+  adguardhome_network:
+    name: adguardhome_network
+    driver: macvlan
+    driver_opts:
+      parent: eth3
+    ipam:
+      config:
+        - gateway: 192.168.1.1
+          subnet: 192.168.1.0/24
+          ip_range: 192.168.1.152/30
